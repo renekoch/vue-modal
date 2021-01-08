@@ -31,6 +31,11 @@ export default {
     open: Boolean,
     closeOn: {type: [Object, null], default: null}
   },
+	watch: {
+		open(val){
+			document.body.setAttribute('data-modal', val ? '1' : '0');
+		}
+	},
   data() {
     return {}
   },
@@ -60,9 +65,24 @@ export default {
 </script>
 
 <style>
-  .rk-modal {
-    z-index: var(--rkm-z-index, 1000);
-  }
+	body[data-modal="1"]{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+	}
+
+	.rk-modal {
+		z-index: var(--rkm-z-index, 1000);
+		position: var(--rkm-position, fixed);
+		top: var(--rkm-top, 0);
+		left: var(--rkm-left, 0);
+		display: var(--rkm-display, flex);
+		align-items: var(--rkm-align-items, center);
+		justify-content: var(--rkm-justify-content, center);
+		width: var(--rkm-width, 100vw);
+		height: var(--rkm-height, 100vh);
+		overflow: auto;
+	}
 
 	.rkm-fade-enter-active,
 	.rkm-fade-leave-active {
