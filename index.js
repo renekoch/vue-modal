@@ -1,8 +1,10 @@
 import Modal from './Modal.vue'
 
+
+export {Modal};
 export default {
   /**
-   * @param {Vue} Vue - Vue instance
+   * @param {Object} Vue - Vue instance
    * @param {Object} options
    */
   install(Vue, options = {}) {
