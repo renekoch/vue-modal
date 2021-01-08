@@ -1,4 +1,5 @@
 # vue-modal
+Modal for VueJS
 
 ### Example
 ```vue
