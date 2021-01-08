@@ -5,7 +5,7 @@
          v-if="open"
          @click.self="onClose('background')"
          @keydown.esc="onClose('esc')">
-        <slot></slot>
+      <slot></slot>
     </div>
   </transition>
 </template>
@@ -29,17 +29,16 @@ export default {
   },
   props: {
     open: Boolean,
-    closeOn: {type: [Object, null], default: null}
+    closeOn: {type: [Object, null], default: null},
   },
-	watch: {
-		open(val){
-			document.body.setAttribute('data-modal', val ? '1' : '0');
-		}
-	},
+  watch: {
+    open(val) {
+      document.body.setAttribute('data-modal', val ? '1' : '0');
+    },
+  },
   data() {
-    return {}
+    return {};
   },
-  watch: {},
   computed: {
     /**
      * @return {{background: Boolean, esc: Boolean}}
@@ -48,8 +47,8 @@ export default {
       return {
         background: !!(this.closeOn && this.closeOn.background),
         esc: !!(this.closeOn && this.closeOn.esc),
-      }
-    }
+      };
+    },
   },
   methods: {
     onOpening() {
@@ -59,38 +58,42 @@ export default {
     },
     onClose(activator) {
       if (this.canClose[activator]) this.$emit('change', false);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
-	body[data-modal="1"]{
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-	}
+body[data-modal="1"] {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 
-	.rk-modal {
-		z-index: var(--rkm-z-index, 1000);
-		position: var(--rkm-position, fixed);
-		top: var(--rkm-top, 0);
-		left: var(--rkm-left, 0);
-		display: var(--rkm-display, flex);
-		align-items: var(--rkm-align-items, center);
-		justify-content: var(--rkm-justify-content, center);
-		width: var(--rkm-width, 100vw);
-		height: var(--rkm-height, 100vh);
-		overflow: auto;
-	}
+.rk-modal {
+  z-index: var(--rkm-z-index, 1000);
 
-	.rkm-fade-enter-active,
-	.rkm-fade-leave-active {
-		transition: opacity var(--rkm-transition-speed, .3s);
-	}
+  position: var(--rkm-position, fixed);
+  top: var(--rkm-top, 0);
+  left: var(--rkm-left, 0);
 
-	.rkm-fade-enter,
-	.rkm-fade-leave-to {
-		opacity: 0;
-	}
+  display: var(--rkm-display, flex);
+  width: var(--rkm-width, 100vw);
+  height: var(--rkm-height, 100vh);
+
+  align-items: var(--rkm-align-items, center);
+  justify-content: var(--rkm-justify-content, center);
+
+  overflow: var(--rkm-overflow, auto);
+}
+
+.rkm-fade-enter-active,
+.rkm-fade-leave-active {
+  transition: opacity var(--rkm-transition-speed, .3s);
+}
+
+.rkm-fade-enter,
+.rkm-fade-leave-to {
+  opacity: 0;
+}
 </style>
